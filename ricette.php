@@ -1,7 +1,18 @@
 <?php
 
+/**
+ * Restituisce tutti i dati di tutti i campi dal database per al tabella passata come valore del parametro
+ * 
+ * @param $tabella Nome tabella da cui selezionare
+ * 
+ * @return array Dati dal database
+ */
 function getDataFromDb($tabella) {
-	$mysqli = new mysqli('127.0.0.1', 'root', '', 'prova_php');
+	$host = '127.0.0.1';
+	$user = 'root';
+	$password = '';
+	$database = 'prova_php';
+	$mysqli = new mysqli($host, $user, $password, $database);
 	
 	$result = $mysqli->query("SELECT * FROM `{$tabella}`");
 	$vettore = $result->fetch_all(MYSQLI_ASSOC);
@@ -18,8 +29,6 @@ $vettore = getDataFromDb('ricette');
 
 
 
-//$result = $mysqli->query('SELECT * FROM `menu`');
-//$menu = $result->fetch_all(MYSQLI_ASSOC);
 $menu = getDataFromDb('menu');
 
 //echo '<pre>';
@@ -108,7 +117,7 @@ $titolo_pagina = 'Le nostre ricette - '. count($vettore); // stringa
 <form method="POST" class="form-inline">
 	<input type="text" name="nome" class="form-control" />
 	<input type="text" name="password" class="form-control"/>
-	<input type="text" name="cognome" class="form"/>
+	<input type="text" name="cognome" class="form-control"/>
 
 	<button>Invia</button>
 </form>
